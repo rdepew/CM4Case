@@ -259,6 +259,8 @@ module cm4(x, y, a) {
  */
 
 // Bare board
-board();
-connectors();
+module cm4iov5() {
+  board();
+  connectors();
+}
 

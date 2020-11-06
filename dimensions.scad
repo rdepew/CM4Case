@@ -29,6 +29,7 @@ bd_w = 160;
 bd_l = 90;
 bd_h = 25.4/16; // standard 1/16" PCB
 bd_corner_r = 3.5;
+
 // Mounting holes
 mh_r = 1;
 mh1_x = 3.5;
@@ -43,11 +44,13 @@ mh5_x = 145;
 mh5_y = 77;
 mh6_x = 11;
 mh6_y = 77;
+
 // HAT
 mh7_x = 11;
 mh7_y = 77;
 mh8_x = 11;
 mh8_y = 77;
+
 // CM4
 mh9_x = 3.5;
 mh9_y = 52.5;
@@ -84,7 +87,7 @@ eth_y = -1.65;
 eth_a = 0;
 usb_w = 13.9;
 usb_l = 17.29;
-usb_h = 14;
+usb_h = 17.5;
 usb_x = 94;
 usb_y = -0.99;
 usb_a = 0;
@@ -136,10 +139,10 @@ cam0_a = 270;
 cam1_x = 11.5;
 cam1_y = 90;
 cam1_a = 180;
-batt_w = 10.25;
-batt_l = 10.25;
-batt_h = 3;
 batt_r = 10.25;
+batt_w = 2 * batt_r;
+batt_l = 2 * batt_r;
+batt_h = 3;
 batt_x = 11;
 batt_y = 37.5;
 batt_a = 270;
@@ -168,3 +171,22 @@ j2_x = 67.625;
 j2_y = 90;
 j2_a = 180;
 
+// Enclosure dimensions
+box_thk = 5;
+box_edge_r = 5;
+box_w = bd_w + 2 * box_thk;
+box_l = bd_l + 2 * box_thk;
+box_h = 20;
+stud_r = 6;
+stud_h = 10; // if z=0 is the floor of the box, 
+             // then z=stud_h is the height of the bottom of the IO board
+             // and z=stud_h + bd_h is the height of the top of the board.
+             // Let's call that bd_top.
+bd_top = stud_h + bd_h;
+
+// Lid
+lid_thk = box_thk;
+lid_edge_r = box_edge_r;
+lid_w = box_w;
+lid_l = box_l;
+lid_h = 10;
