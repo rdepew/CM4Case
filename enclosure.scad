@@ -129,6 +129,7 @@ module bottom() {
 
 module top() {
   color("yellow", alpha=0.5)
+  /* color("yellow") */
   difference () {
     // The lid body
     union() {
@@ -149,52 +150,59 @@ module top() {
         }
         // TODO: Channel for lid
       }
-      // Mounting studs go here
-      // Use mounting holes 2, 3, 4, 5, 6.
-      translate([mh2_x, mh2_y, 0])
-        mounting_stud();
-      translate([mh3_x, mh3_y, 0])
-        mounting_stud();
-      translate([mh4_x, mh4_y, 0])
-        mounting_stud();
-      translate([mh5_x, mh5_y, 0])
-        mounting_stud();
-      translate([mh6_x, mh6_y, 0])
-        mounting_stud();
+      // Fill-ins (opposite of cutouts)
+      translate([hdmi0_x - hdmi_w/2, 
+              -lid_edge_r,
+              bd_top - box_h + hdmi_h])
+        cube([hdmi_w, lid_edge_r, lid_h]);
+      translate([hdmi1_x - hdmi_w/2,
+              -lid_edge_r,
+              bd_top - box_h + hdmi_h])
+        cube([hdmi_w, lid_edge_r, lid_h]);
+      translate([usbslv_x-usbslv_w/2,
+              -lid_edge_r,
+              bd_top - box_h + usbslv_h])
+        cube([usbslv_w, lid_edge_r, lid_h]);
+      translate([sdcard_x-sdcard_w/2,
+              -lid_edge_r,
+              bd_top - box_h + sdcard_h])
+        cube([sdcard_w, lid_edge_r, lid_h]);
+      translate([p5v_x-p5v_w/2,
+              lid_l - 2 * lid_edge_r,
+              bd_top - box_h + p5v_h])
+        cube([p5v_w, lid_edge_r, lid_h]);
+      translate([disp0_x-disp_w/2,
+              lid_l - 2 * lid_edge_r,
+              bd_top - box_h + disp_h])
+        cube([disp_w, lid_edge_r, lid_h]);
+      translate([disp1_x-disp_w/2,
+              lid_l - 2 * lid_edge_r,
+              bd_top - box_h + disp_h])
+        cube([disp_w, lid_edge_r, lid_h]);
+      translate([cam1_x-cam_w/2,
+              lid_l - 2 * lid_edge_r,
+              bd_top - box_h + cam_h])
+        cube([disp_w, lid_edge_r, lid_h]);
+      translate([-lid_edge_r,
+              cam0_y-cam_w/2,
+              bd_top - box_h + cam_h])
+        cube([lid_edge_r, cam_w, lid_h]);
+      translate([-lid_edge_r,
+              batt_y-batt_r,
+              bd_top - box_h + batt_h])
+        cube([lid_edge_r, batt_w, lid_h]);
       // test blocks go here
     } // lid-body union
     // Cutouts
     union() { 
-      translate([hdmi0_x - hdmi_w/2, hdmi0_y-6, bd_top])
-        cube([hdmi_w, 12, lid_h]);
-      translate([hdmi1_x - hdmi_w/2, hdmi1_y-6, bd_top])
-        cube([hdmi_w, 12, lid_h]);
-      translate([eth_x-eth_w/2, eth_y-6, bd_top])
-        cube([eth_w, 12, lid_h]);
-      translate([usb_x-usb_w/2, usb_y-6, bd_top])
-        cube([usb_w, 12, lid_h]);
-      translate([usbslv_x-usbslv_w/2, usbslv_y-6, bd_top])
-        cube([usbslv_w, 12, lid_h]);
-      translate([sdcard_x-sdcard_w/2, sdcard_y-6, bd_top])
-        cube([sdcard_w, 12, lid_h]);
-      translate([p12v_x-p12v_w/2, p12v_y-6, bd_top])
-        cube([p12v_w, 12, lid_h]);
-      translate([p5v_x-p5v_w/2, p5v_y-6, bd_top])
-        cube([p5v_w, 12, lid_h]);
-      translate([j2_x-j2_w/2, j2_y-6, bd_top])
-        cube([j2_w, 12, lid_h]);
-      translate([j2_x-j2_w/2, j2_y-6, bd_top])
-        cube([j2_w, 12, lid_h]);
-      translate([disp0_x-disp_w/2, disp0_y-6, bd_top])
-        cube([disp_w, 12, lid_h]);
-      translate([disp1_x-disp_w/2, disp1_y-6, bd_top])
-        cube([disp_w, 12, lid_h]);
-      translate([cam1_x-cam_w/2, cam1_y-6, bd_top])
-        cube([cam_w, 12, lid_h]);
-      translate([cam0_x-6, cam0_y-cam_w/2, bd_top])
-        cube([12, cam_w, lid_h]);
-      translate([batt_x-batt_r-8, batt_y-batt_r, bd_top-0.5])
-        cube([12, batt_w, lid_h]);
+      translate([eth_x-eth_w/2, eth_y-6, bd_top - box_h])
+        cube([eth_w, 12, eth_h]);
+      translate([usb_x-usb_w/2, usb_y-6, bd_top - box_h])
+        cube([usb_w, 12, usb_h]);
+      translate([p12v_x-p12v_w/2, p12v_y-6, bd_top - box_h])
+        cube([p12v_w, 12, p12v_h]);
+      translate([j2_x-j2_w/2, j2_y-6, bd_top - box_h])
+        cube([j2_w, 12, j2_h]);
     } // cutouts union
     translate([lid_w/2, lid_l/2, -10])
       cylinder(r=20, h=40);
