@@ -67,6 +67,8 @@ module board() {
 module connectors() {
   hdmi(hdmi0_x, hdmi0_y, hdmi0_a);
   hdmi(hdmi1_x, hdmi1_y, hdmi1_a);
+  led(d1_x, d1_y, d1_a, d1_color);
+  led(d2_x, d2_y, d2_a, d2_color);
   eth(eth_x, eth_y, eth_a);
   usb(usb_x, usb_y, usb_a);
   usbslave(usbslv_x, usbslv_y, usbslv_a);
@@ -74,13 +76,16 @@ module connectors() {
   p12v(p12v_x, p12v_y, p12v_a);
   fan(fan_x, fan_y, fan_a);
   p5v(p5v_x, p5v_y, p5v_a);
-  j2(j2_x, j2_y, j2_a);
+  jumper(j2_x, j2_y, j2_a, j2_w, j2_l, j2_h);
   disp(disp0_x, disp0_y, disp0_a);
   disp(disp1_x, disp1_y, disp1_a);
   cam(cam0_x, cam0_y, cam0_a);
   cam(cam1_x, cam1_y, cam1_a);
   battery(batt_x, batt_y, batt_a);
   hat(hat_x, hat_y, hat_a);
+  jumper(j6_x, j6_y, j6_a, j6_w, j6_l, j6_h);
+  jumper(j9_x, j9_y, j9_a, j9_w, j9_l, j9_h);
+  jumper(j14_x, j14_y, j14_a, j14_w, j14_l, j14_h);
   pcie(pcie_x, pcie_y, pcie_a);
   cm4(cm4_x, cm4_y, cm4_a);
 }
@@ -93,6 +98,14 @@ module hdmi(x, y, a) {
       translate([2,-1, 2]) 
         cube([hdmi_w-4, hdmi_l-4, hdmi_h-4]);
     }
+}
+
+// led datum is center of bottom outside edge
+module led(x, y, a, c) {
+  translate([x, y, 0]) rotate([0, 0, a])
+    translate([-led_w/2, 0, 0]) 
+      color(c)
+        cube([led_w, led_l, led_h]);
 }
 
 // eth datum is center of bottom outside edge
@@ -168,17 +181,6 @@ module fan(x, y, a) {
   }
 }
 
-// j2 datum is center of bottom outside edge
-module j2(x, y, a) {
-  color("darkslategrey")
-  translate([x, y, 0]) rotate([0, 0, a])
-    translate([-j2_w/2, 0, 0]) difference() {
-      cube([j2_w, j2_l, j2_h]);
-      translate([0.5,-1,0.5])
-        cube([j2_w-1, j2_l-2, j2_h-1]);
-  }
-}
-
 // disp datum is center of bottom outside edge
 module disp(x, y, a) {
   translate([x, y, 0]) rotate([0, 0, a])
@@ -213,6 +215,13 @@ module hat(x, y, a) {
     cube([hat_w, hat_l, hat_h]);
 }
 
+// jumper datum is lower left corner
+module jumper(x, y, a, w, l, h) {
+  color("darkslategrey")
+  translate([x, y, 0]) rotate([0, 0, a])
+    cube([w, l, h]);
+}
+
 // pcie datum is lower left corner
 module pcie(x, y, a) {
   color("darkslategrey")
@@ -225,7 +234,8 @@ module cm4(x, y, a) {
   translate([x + 3.5,
              y + 3.5,
              25.4/8]) {
-    color("green")
+    // color("green")
+    color([0.4, 1, 0.4])
       difference() {
         union() {
           linear_extrude(height = bd_h)

@@ -70,6 +70,17 @@ mh14_y = 86.5;
  * x, y are the location of the component datum.
  * a is angle of rotation around the component datum.
  */
+led_w = 2;
+led_l = 1;
+led_h = 1;
+d1_x = 33.7;
+d1_y = 0.2;
+d1_a = 0;
+d1_color = [0.5, 0.5, 1];
+d2_x = 37.35;
+d2_y = 0.2;
+d2_a = 0;
+d2_color = [0.5, 1, 0.5];
 hdmi_w = 16.2;
 hdmi_l = 11.55;
 hdmi_h = 8;
@@ -167,9 +178,27 @@ cm4_a = 0;
 j2_w = 18.375;
 j2_l = 5.670;
 j2_h = hat_h;
-j2_x = 67.625;
+j2_x = 77;
 j2_y = 90;
 j2_a = 180;
+j6_w = 6.1;
+j6_l = 6.1;
+j6_h = hat_h;
+j6_x = 40;
+j6_y = 55.5;
+j6_a = 0;
+j9_w = 6.1;
+j9_l = 6.1;
+j9_h = hat_h;
+j9_x = 58.48;
+j9_y = 43.3;
+j9_a = 0;
+j14_w = 6.1;
+j14_l = 15.25;
+j14_h = hat_h;
+j14_x = 107.1;
+j14_y = 6.5;
+j14_a = 0;
 
 // Enclosure dimensions
 box_thk = 5;
