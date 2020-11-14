@@ -231,10 +231,18 @@ module pcie(x, y, a) {
 
 // cm4 datum is lower left corner
 module cm4(x, y, a) {
-  translate([x + 3.5,
-             y + 3.5,
-             25.4/8]) {
+  z_offset=3.5;
+  translate([x, y, z_offset]) {
+    // The connectors
+    translate([1.5, 19, -z_offset])
+      color("black")
+        cube([3, 23, z_offset + 0.5]);
+    translate([34.5, 19, -z_offset])
+      color("black")
+        cube([3, 23, z_offset + 0.5]);
+    // The bare PC board
     // color("green")
+    translate([3.5, 3.5, 0])
     color([0.4, 1, 0.4])
       difference() {
         union() {
@@ -252,14 +260,30 @@ module cm4(x, y, a) {
           translate([33, 48, -5]) cylinder(r=mh_r, h=10);
         }
       }
-    chip_w = 12.5;
-    chip_l = 12.5;
+    // Components
+    chip_w = 16;
+    chip_l = 16;
     chip_h = 1.5;
-    color("silver")
-      translate([(cm4_w-chip_w)/2 - bd_corner_r,
-                 (cm4_l-chip_l)/2 - bd_corner_r,
-                 bd_h])
+    color("silver") {
+      translate([17 - chip_w/2, 23 - chip_l/2, bd_h])
         cube([chip_w, chip_l, chip_h]);
+      translate([21.5, 36.5, bd_h])
+        cube([13.5, 11, chip_h/2]);
+    }
+    color("black") {
+      translate([9, 2.5, bd_h])
+        cube([15.8, 11.8, chip_h]);
+      translate([31, 10.5, bd_h])
+        cube([7, 7, chip_h]);
+      translate([28, 22, bd_h])
+        cube([11, 13.3, chip_h]);
+      translate([9, 47, bd_h])
+        cube([5, 5, chip_h]);
+    }
+    color("green")
+      translate([18.5, 48.5, bd_h]) cube([11, 6.5, 0.25]);
+    color("gold")
+      translate([30, 52.5, bd_h]) cylinder(r=2, h=4);
   }
 }
 
