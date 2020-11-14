@@ -30,6 +30,7 @@ $fn=50;
 include <dimensions.scad>
 use <cm4iov5.scad>
 use <fillets.scad>
+include <fans.scad>
 fr = 2.5; // fillet radius in mm
 
 /**********************************************************
@@ -263,15 +264,28 @@ module top() {
     } // jumper-and-header-access union
     // Ventilation
     union() {
-      v4(cm4_x + 5, cm4_y + 5);
-      v3(cm4_x + 10, cm4_y + 12.5);
-      v4(cm4_x + 5, cm4_y + 20);
-      v3(cm4_x + 10, cm4_y + 27.5);
-      v4(cm4_x + 5, cm4_y + 35);
-      v3(cm4_x + 10, cm4_y + 42.5);
-      v3(cm4_x + 15, cm4_y + 50);
+      // v4(cm4_x + 5, cm4_y + 5);
+      // v3(cm4_x + 10, cm4_y + 12.5);
+      // v4(cm4_x + 5, cm4_y + 20);
+      // v3(cm4_x + 10, cm4_y + 27.5);
+      // v4(cm4_x + 5, cm4_y + 35);
+      // v3(cm4_x + 10, cm4_y + 42.5);
+      // v3(cm4_x + 15, cm4_y + 50);
       s5(cm4_x);
     } // vents union
+    // Fan mounts and inlet
+    union() {
+      translate([cm4_x + hole_offset, cm4_y + 3 + hole_offset, lid_h - bd_corner_r])
+        cylinder(r = hole_r, h = 10);
+      translate([cm4_x + lw - hole_offset, cm4_y + 3 + hole_offset, lid_h - bd_corner_r])
+        cylinder(r = hole_r, h = 10);
+      translate([cm4_x + hole_offset, cm4_y + 3 + lw - hole_offset, lid_h - bd_corner_r])
+        cylinder(r = hole_r, h = 10);
+      translate([cm4_x + lw - hole_offset, cm4_y + 3 + lw - hole_offset, lid_h - bd_corner_r])
+        cylinder(r = hole_r, h = 10);
+      translate([cm4_x + lw/2, cm4_y + 3 + lw/2, lid_h - bd_corner_r])
+        cylinder(r = lw/2 - end_thk, h = 10);
+    }
     // mounting stud holes
     translate([mh2_x, mh2_y, 0]) cylinder(r=stud_hole_r, h=100);
     translate([mh2_x, mh2_y, box_h + 12]) cylinder(r=5, h=100);
@@ -294,7 +308,7 @@ module top() {
 translate([0, 0, bd_top]) cm4iov5();
 translate([0, 0, 0]) bottom();
 // translate([0, 0, box_h + 20]) top();
+translate([cm4_x, cm4_y + 3, box_h + lid_h + bd_corner_r/2 - fan_body_h]) 40mmfan();
 translate([0, 0, box_h]) top();
-
 
 
