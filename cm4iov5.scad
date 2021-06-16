@@ -231,7 +231,7 @@ module pcie(x, y, a) {
 
 // cm4 datum is lower left corner
 module cm4(x, y, a) {
-  z_offset=3.5;
+  z_offset=3.0;
   translate([x, y, z_offset]) {
     // The connectors
     translate([1.5, 19, -z_offset])
@@ -263,7 +263,7 @@ module cm4(x, y, a) {
     // Components
     chip_w = 16;
     chip_l = 16;
-    chip_h = 1.5;
+    chip_h = 2.5;
     color("silver") {
       translate([17 - chip_w/2, 23 - chip_l/2, bd_h])
         cube([chip_w, chip_l, chip_h]);

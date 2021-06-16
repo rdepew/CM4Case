@@ -173,8 +173,8 @@ module s5(x) {
 }
 
 module top() {
-  color("yellow", alpha=0.5)
-  /* color("yellow") */
+  /* color("yellow", alpha=0.2) */
+  color("yellow")
   difference () {
     // The lid body
     union() {
@@ -305,10 +305,22 @@ module top() {
 
 // Exploded view
 // translate([0, 0, 80]) cm4iov5();
-translate([0, 0, bd_top]) cm4iov5();
+translate([0, 0, bd_top + 20]) cm4iov5();
 translate([0, 0, 0]) bottom();
 // translate([0, 0, box_h + 20]) top();
+translate([cm4_x, cm4_y + 3, box_h + lid_h + bd_corner_r/2 - fan_body_h + 50]) 40mmfan();
+translate([0, 0, box_h + 90]) top();
+
+// Assembled view
+/*
+translate([0, 0, bd_top]) cm4iov5();
+translate([0, 0, 0]) bottom();
 translate([cm4_x, cm4_y + 3, box_h + lid_h + bd_corner_r/2 - fan_body_h]) 40mmfan();
 translate([0, 0, box_h]) top();
+*/
 
-
+// Laid out to print
+/*
+translate([box_edge_r, box_edge_r, box_edge_r]) bottom();
+translate([box_edge_r, 2*box_l + 15, lid_h + box_edge_r]) rotate([180, 0, 0]) top();
+*/
